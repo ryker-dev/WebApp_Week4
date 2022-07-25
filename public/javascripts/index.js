@@ -65,6 +65,6 @@ btnSubmit.addEventListener('click', function() {
     formdata.append("images", images);
 
     const request = new XMLHttpRequest();
-    request.open("POST", `http://localhost:${port}/recipe/`);
+    request.open("POST", `http://localhost:${port}/images/`);
     request.send(formdata);
 });
