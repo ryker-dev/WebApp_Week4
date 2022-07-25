@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 /* GET recipe */
 router.get('/', function(req, res, next) {
-  const recipename = "Pasta";
+  const recipename = "pizza";
   fetch(`http://localhost:${port}/recipe/${recipename}`)
   .then((response) => response.json())
   .then((data) => {

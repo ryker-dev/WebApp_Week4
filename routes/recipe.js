@@ -2,10 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 /* GET recipe json. */
-router.get('/:id', function(req, res, next) {
-    const id = req.params.id;
+router.get('/:food', function(req, res, next) {
+    const food = req.params.food;
   res.json({
-    name: id,
+    name: food,
     instructions: ["Prep ingredients", "Mix ingredients", "???", "Profit"],
     ingredients: ["Water", "Salt", "Flour"]
   });
