@@ -51,7 +51,7 @@ btnSubmit.addEventListener('click', function() {
         headers: {
             "Content-type": "application/json"
         },
-        body: `{ "name": "${nameText.value}", "ingredients": "${ingredientList}", "instructions": "${instructionList}" }`
+        body: `{ "name": "${nameText.value}", "ingredients": ${JSON.stringify(ingredientList)}, "instructions": ${JSON.stringify(instructionList)} }`
     })
     .then(response => response.json())
     .then(data => {
