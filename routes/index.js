@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
 
+const port = process.env.PORT || '3000';
+
 /* GET home page. */
 /* 
 router.get('/', function(req, res, next) {
@@ -11,7 +13,7 @@ router.get('/', function(req, res, next) {
 /* GET recipe */
 router.get('/', function(req, res, next) {
   const recipename = "pizza";
-  fetch(`http://localhost:3000/recipe/${recipename}`)
+  fetch(`http://localhost:${port}/recipe/${recipename}`)
   .then((response) => response.json())
   .then((data) => {
     res.render('index', { name: recipename, ingredients: data.ingredients, instructions: data.instructions});
