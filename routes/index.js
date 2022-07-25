@@ -11,12 +11,12 @@ router.get('/', function(req, res, next) {
 }); */
 
 /* GET recipe */
-router.get('/', function(req, res, next) {
-  const recipename = "pizza";
+router.get('/:recipename', function(req, res, next) {
+  const recipename = req.params.recipename;
   fetch(`http://localhost:${port}/recipe/${recipename}`)
   .then((response) => response.json())
   .then((data) => {
-    res.render('index', { name: recipename, ingredients: data.ingredients, instructions: data.instructions});
+    res.render('index', { title: recipename, name: recipename, ingredients: data.ingredients, instructions: data.instructions});
   });
 });
 
