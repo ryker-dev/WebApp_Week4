@@ -1,7 +1,7 @@
 //const port = process.env.PORT || '3000';
 const ingredientList = [];
 const instructionList = [];
-const port = 3000;
+const port = 1234;
 
 async function fetchRecipe (recipeName) {
     const response = await fetch(`http://localhost:${port}/recipe/pizza`);
@@ -56,5 +56,7 @@ btnSubmit.addEventListener('click', function() {
     .then(response => response.json())
     .then(data => {
         console.log(data);
-    })
+    }).catch(
+        console.log("Error")
+    );
 });
