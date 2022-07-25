@@ -1,7 +1,7 @@
 //const port = process.env.PORT || '3000';
 const ingredientList = [];
 const instructionList = [];
-const port = 1234
+const port = 3000;
 
 async function fetchRecipe (recipeName) {
     const response = await fetch(`http://localhost:${port}/recipe/pizza`);
