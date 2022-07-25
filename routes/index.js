@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const fetch = require('node-fetch');
 
 /* GET home page. */
 /* 
@@ -8,10 +9,13 @@ router.get('/', function(req, res, next) {
 }); */
 
 /* GET recipe */
-router.get('/:id', function(req, res, next) {
-  const id = req.params.id;
-  const instr = ["Prep ingredients", "Mix ingredients", "???", "Profit"];
-  const ingre = ["Water", "Salt", "Flour"];
-  res.render('index', { name: id, ingredients: ingre, instructions: instr});
+router.get('/', function(req, res, next) {
+  const recipename = "pizza";
+  fetch(`http://localhost:3000/recipe/${recipename}`)
+  .then((response) => response.json())
+  .then((data) => {
+    res.render('index', { name: recipename, ingredients: data.ingredients, instructions: data.instructions});
+  });
 });
+
 module.exports = router;
