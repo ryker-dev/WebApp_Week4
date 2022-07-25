@@ -1,12 +1,11 @@
 //const port = process.env.PORT || '3000';
 const ingredientList = [];
 const instructionList = [];
-const port = 1234;
+const port = 3000;
 
 async function fetchRecipe (recipeName) {
     const response = await fetch(`http://localhost:${port}/recipe/pizza`);
-    const data = await response.json();
-    return data;
+    return response.json();
 }
 
 fetchRecipe("pizza").then((res) => {
@@ -59,4 +58,13 @@ btnSubmit.addEventListener('click', function() {
     }).catch(
         console.log("Error")
     );
+    
+    const form = document.getElementById("image-form");
+    const images = document.getElementById("image-input");
+    const formdata = new FormData();
+    formdata.append("images", images);
+
+    const request = new XMLHttpRequest();
+    request.open("POST", `http://localhost:${port}/recipe/`);
+    request.send(formdata);
 });
