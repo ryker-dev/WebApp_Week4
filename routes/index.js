@@ -11,8 +11,8 @@ router.get('/', function(req, res, next) {
 }); */
 
 /* GET recipe */
-router.get('/:recipename', function(req, res, next) {
-  const recipename = req.params.recipename;
+router.get('/', function(req, res, next) {
+  const recipename = "pizza";
   fetch(`http://localhost:${port}/recipe/${recipename}`)
   .then((response) => response.json())
   .then((data) => {
