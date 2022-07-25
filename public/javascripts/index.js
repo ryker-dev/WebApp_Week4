@@ -1,20 +1,13 @@
 //const port = process.env.PORT || '3000';
 const ingredientList = [];
 const instructionList = [];
+const port = normalizePort(process.env.PORT || '3000');
 
 async function fetchRecipe (recipeName) {
-    const response = await fetch("http://localhost:3000/recipe/pizza");
+    const response = await fetch(`http://localhost:${port}/recipe/pizza`);
     const data = await response.json();
     return data;
 }
-
-async function fetchImage(breedName) {
-    const response = await fetch(
-      "https://dog.ceo/api/breed/" + breedName + "/images/random"
-    );
-    const data = await response.json();
-    return data.message;
-  }
 
 fetchRecipe("pizza").then((res) => {
     console.log(res.name);
@@ -53,7 +46,7 @@ btnInstruction.addEventListener("click", function() {
 const btnSubmit  = document.getElementById('submit');
 btnSubmit.addEventListener('click', function() {
     console.log("Posting");
-    fetch("http://localhost:3000/recipe/", {
+    fetch(`http://localhost:${port}/recipe/`, {
         method: "post",
         headers: {
             "Content-type": "application/json"
