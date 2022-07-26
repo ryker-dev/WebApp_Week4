@@ -1,7 +1,7 @@
 //const port = process.env.PORT || '3000';
 const ingredientList = [];
 const instructionList = [];
-const port = 3000;
+const port = 1234;
 
 const btnIngredient = document.getElementById("add-ingredient");
 const textIngredient = document.getElementById("ingredients-text")
