@@ -1,7 +1,7 @@
 //const port = process.env.PORT || '3000';
 const ingredientList = [];
 const instructionList = [];
-const port = 1234;
+const port = 3000;
 
 const btnIngredient = document.getElementById("add-ingredient");
 const textIngredient = document.getElementById("ingredients-text")
@@ -66,13 +66,12 @@ btnSubmit.addEventListener('click', function() {
     );
     
     const formdata = new FormData();
-    formdata.append("images", imageInput.value);
-    console.log(imageInput);
+    for (const element of imageInput.files) {
+        formdata.append("images", element);;
+    }
+    
     fetch(`http://localhost:${port}/images/`, {
         method: "post",
-        headers: {
-            "Content-type": "multipart/form-data"
-        },
         body: formdata
     })
     .then(response => response.json())
