@@ -67,6 +67,7 @@ btnSubmit.addEventListener('click', function() {
     
     const formdata = new FormData();
     formdata.append("images", imageInput.value);
+    console.log(imageInput);
     fetch(`http://localhost:${port}/images/`, {
         method: "post",
         headers: {
