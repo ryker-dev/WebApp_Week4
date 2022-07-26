@@ -1,34 +1,40 @@
 //const port = process.env.PORT || '3000';
 const ingredientList = [];
 const instructionList = [];
-const port = 1234;
-
-async function fetchRecipe (recipeName) {
-    const response = await fetch(`http://localhost:${port}/recipe/pizza`);
-    return response.json();
-}
-
-fetchRecipe("pizza").then((res) => {
-    console.log(res.name);
-    const recipeName = document.createElement("p");
-    recipeName.innerText = res.name;
-    const recipeIngredients = document.createElement("p");
-    recipeIngredients.innerText = res.ingredients;
-    const recipeInstructions = document.createElement("p");
-    recipeInstructions.innerText = res.instructions;
-
-    const container = document.getElementById("recipe-container");
-    container.appendChild(recipeName);
-    container.appendChild(recipeIngredients);
-    container.appendChild(recipeInstructions);
-
-});
+const port = 3000;
 
 const btnIngredient = document.getElementById("add-ingredient");
 const textIngredient = document.getElementById("ingredients-text")
 const btnInstruction = document.getElementById("add-instruction");
 const textInstruction = document.getElementById("instructions-text")
 const nameText = document.getElementById("name-text");
+const container = document.getElementById("recipe-container");
+const viewname = document.getElementById("recipe-name");
+const viewingredients = document.getElementById("view-ingredients");
+const viewinstructions = document.getElementById("view-instructions");
+const imageInput = document.getElementById("image-input");
+const imageForm = document.getElementById("image-form");
+
+async function fetchRecipe () {
+    const response = await fetch(`http://localhost:${port}/recipe/pizza`);
+    return response.json();
+}
+
+fetchRecipe().then((res) => {
+    console.log(res.name);
+    viewname.innerText = res.name;
+    res.ingredients.forEach(element => {
+        const line = document.createElement("li");
+        line.innerText = element;
+        viewingredients.appendChild(line);
+    });
+    res.instructions.forEach(element => {
+        const line = document.createElement("li");
+        line.innerText = element;
+        viewinstructions.appendChild(line);
+    });
+
+});
 
 btnIngredient.addEventListener("click", function() {
     const text = textIngredient.value;
@@ -59,6 +65,23 @@ btnSubmit.addEventListener('click', function() {
         console.log("Error")
     );
     
+    const formdata = new FormData();
+    formdata.append("images", imageInput.value);
+    fetch(`http://localhost:${port}/images/`, {
+        method: "post",
+        headers: {
+            "Content-type": "multipart/form-data"
+        },
+        body: formdata
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    }).catch(
+        console.log("Error")
+    );
+
+    /*
     const form = document.getElementById("image-form");
     const images = document.getElementById("image-input");
     const formdata = new FormData();
@@ -66,5 +89,5 @@ btnSubmit.addEventListener('click', function() {
 
     const request = new XMLHttpRequest();
     request.open("POST", `http://localhost:${port}/images/`);
-    request.send(formdata);
+    request.send(formdata);*/
 });
